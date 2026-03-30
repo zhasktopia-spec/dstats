@@ -1,34 +1,5 @@
-
-const fetch = require('node-fetch');
-
-const UPSTASH_URL = 'https://xxxx.upstash.io';
-const UPSTASH_TOKEN = 'your_token';
-
 export default async function handler(req, res) {
-
+  console.log(`Request received at ${new Date().toISOString()}`);
   res.setHeader('Access-Control-Allow-Origin', '*');
-  
-  if (req.method === 'POST') {
-
-    const response = await fetch(`${UPSTASH_URL}/incr/counter`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${UPSTASH_TOKEN}`,
-      },
-    });
-    const count = await response.text();
-    res.status(200).json({ count: parseInt(count, 10) });
-  } 
-  else if (req.method === 'GET') {
-    const response = await fetch(`${UPSTASH_URL}/get/counter`, {
-      headers: {
-        Authorization: `Bearer ${UPSTASH_TOKEN}`,
-      },
-    });
-    const count = await response.text();
-    res.status(200).json({ count: parseInt(count, 10) });
-  } 
-  else {
-    res.status(405).end('Method Not Allowed');
-  }
+  res.status(200).json({ message: 'OK' });
 }
